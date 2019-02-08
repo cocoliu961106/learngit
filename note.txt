@@ -1,0 +1,60 @@
+创建空目录： mkdir <dirname>
+进入目录： cd <dirname>
+git初始化该目录：git init <dirname>
+
+git 提交文件：
+1）把文件放入暂存区：git add <filename>
+2) 将暂存区的内容提交到当前分支: git commit -m "一些文字说明"
+
+查看仓库当前状态：git status
+查看与原版本相比修改的内容（commit之前）：git diff
+查看工作区和版本库里的区别： git diff HEAD --<filename>
+
+查看版本历史记录：git log		//log命令
+查看命令历史：git reflog
+
+版本回退：
+1）回退到上一个版本：git reset --hard HEAD^                   //HEAD表示当前版本，^表示上一个版本
+2）前往某一个版本 ：git reset --hard <version id>
+
+查看当前目录下文件内容：cat <filename>
+
+撤销修改：
+1）丢弃工作区的修改：git checkout --<filename>
+2) 撤销暂存区的修改：git reset HEAD <filename>
+
+删除文件： git rm <filename>
+
+分支操作：
+1）创建分支：git  branch <branch name>    
+2）切换分支：git checkout <branck name>
+1),2)相当于： git checkout -b <branch name>
+3）查看当前分支：git branch
+4）将分支合并到当前分支上：git merge <branch name>		//默认方式是 fast foward,可选择 --no-ff，区别是 --no-ff 每一次的合并都创建一个新的commit记录。即使这个commit只是fast-foward，用来避免丢失信息
+4）删除分支：git branch -d <branch name>
+
+储藏工作现场：
+1）储藏当前分支：git stash
+2）查看所有储藏的分支：git stash list
+3）恢复最近的一次工作内容，并删除对应stash
+4）恢复某一个stash的工作内容：git stash apply <stash name>
+5）删除对应stash: git stash drop <stash name> 
+
+远程库操作：
+1）将本地库关联到远程库：git remote add origin git@github.com:<github username>/<repositoryname>.git
+2）拉取远程库内容：git pull <repository> <branch name>
+3）查看远程库信息：git remote		//-v显示可以抓取和推送的地址
+4）将本地库的内容推送到远程库：git push -u origin master        //-u表示将本地master和远程master关联起来，方便以后推送或者拉取  
+5）推送到远程库：git push <repository> <branch name>
+6)  设置本地分支与远程库分支的链接：git branch --set-upstream-to=<remote repository name>/<remote branch name> <native branch name>
+
+将分叉的提交变成一条直线：git rebase
+
+标签操作：
+1）查看所有标签：git tag
+2）为指定提交创建标签：git tag <version id> <commit id>		commit id参数没有则是默认创建标签在最近一次提交上
+3）查看指定标签提交信息：git show <tagname>
+4）删除标签：git tag -d <tagname>
+5）推送某个标签到远程：git push origin <tagname>
+6）一次性推送全部尚未推送到远程的本地标签：git push origin --tags
+7）删除远程标签：git push origin :refs/tags/<tagname>
